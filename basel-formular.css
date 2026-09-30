@@ -105,11 +105,12 @@
 
 .formio-form .form-check { display: flex; gap: 10px; align-items: flex-start; padding-left: 0; margin-bottom: 8px; }
 .formio-form .form-check-input {
+  position: static; margin-left: 0;
   width: 20px; height: 20px; margin: 2px 0 0; flex: none; float: none;
   accent-color: var(--bs-f-green);
 }
 .formio-form .form-check-input:checked { background-color: var(--bs-f-green); border-color: var(--bs-f-green); }
-.formio-form .form-check-label { font-weight: 400; }
+.formio-form .form-check-label { font-weight: 400; padding-left: 0; margin-left: 0; }
 
 /* Fehler */
 .formio-form .has-error .form-control,
