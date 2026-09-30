@@ -1,0 +1,189 @@
+/*
+ * basel-formular.css
+ * Stylesheet für Form.io-Formulare, angelehnt an den klickbaren Prototyp
+ * P028 Kanalisationsbegehren (Stand 20.09.2026) und an die kantonalen
+ * Online-Formulare. Kein offizielles Kantonslogo.
+ * Alle Regeln sind auf .formio-form begrenzt, damit das Form.io-Portal selbst
+ * unverändert bleibt.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+.formio-form {
+  --bs-f-ground: #ffffff;
+  --bs-f-band: #f1f3f0;
+  --bs-f-panel: #f4f7f4;
+  --bs-f-ink: #1b211d;
+  --bs-f-muted: #5a645e;
+  --bs-f-line: #c5ccc7;
+  --bs-f-green: #1f6138;
+  --bs-f-green-hi: #2c8450;
+  --bs-f-on-green: #ffffff;
+  --bs-f-error: #b3261e;
+  --bs-f-warn-bg: #fdf3d7;
+  --bs-f-warn-ink: #5b4300;
+  --bs-f-stop-bg: #fbe4e1;
+  --bs-f-stop-ink: #7a1710;
+
+  font-family: "Inter", system-ui, "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--bs-f-ink);
+  background: var(--bs-f-ground);
+  max-width: 1020px;
+}
+
+/* ---------- Reihenfolge im Wizard: Kopf, Schritte, Inhalt, Buttons ---------- */
+.formio-form > div { display: flex; flex-direction: column; }
+.formio-form .wizard-page { display: contents; }
+.formio-form .wizard-page > .formio-component { order: 3; }
+.formio-form .wizard-page > .bs-kopf { order: 1; max-width: none; margin-bottom: 0; }
+.formio-form > div > nav { order: 2; }
+.formio-form .formio-wizard-nav-container { order: 4; }
+
+/* ---------- Kopfbereich (HTML-Element mit Klasse bs-kopf) ---------- */
+.formio-form .bs-band {
+  background: var(--bs-f-band);
+  display: flex; gap: 14px; align-items: center;
+  padding: 14px 20px; margin: 0 0 36px;
+}
+.formio-form .bs-logo {
+  width: 42px; height: 56px; border: 1.5px dashed var(--bs-f-muted);
+  display: grid; place-items: center; text-align: center;
+  font-size: 10px; line-height: 1.1; color: var(--bs-f-muted);
+}
+.formio-form .bs-org { border-left: 2px solid var(--bs-f-ink); padding-left: 12px; line-height: 1.25; }
+.formio-form .bs-org small { display: block; font-size: 13px; }
+.formio-form .bs-org b { font-size: 18px; }
+.formio-form .bs-h1 {
+  color: var(--bs-f-green-hi); font-size: clamp(26px, 5vw, 46px); line-height: 1.1;
+  font-weight: 700; margin: 0 0 6px; overflow-wrap: anywhere; hyphens: auto;
+}
+.formio-form .bs-sub { color: var(--bs-f-muted); max-width: 65ch; margin: 0 0 22px; }
+.formio-form .bs-h2 { font-size: 24px; font-weight: 600; margin: 8px 0 18px; }
+
+/* ---------- Schrittnavigation (Form.io-Breadcrumb als Reiter) ---------- */
+.formio-form > div > nav > ul.pagination {
+  display: flex; flex-wrap: nowrap; gap: 4px; overflow-x: auto;
+  margin: 0 0 30px; padding: 0 0 4px; border-bottom: 6px solid var(--bs-f-band);
+  counter-reset: bs-schritt;
+}
+.formio-form > div > nav > ul.pagination .page-item { counter-increment: bs-schritt; flex: none; }
+.formio-form > div > nav > ul.pagination .page-link {
+  border: 0; border-bottom: 2px solid transparent; border-radius: 0 !important;
+  background: transparent; color: var(--bs-f-muted);
+  font-size: 13px; padding: 4px 10px; margin: 0; box-shadow: none;
+}
+.formio-form > div > nav > ul.pagination .page-link::before { content: counter(bs-schritt) ". "; }
+.formio-form > div > nav > ul.pagination .page-item.active .page-link {
+  color: var(--bs-f-ink); font-weight: 600; border-bottom-color: var(--bs-f-green-hi);
+  background: transparent;
+}
+.formio-form > div > nav > ul.pagination .page-link:hover { color: var(--bs-f-green-hi); background: transparent; }
+
+/* ---------- Felder ---------- */
+.formio-form .formio-component { margin-bottom: 22px; max-width: 760px; }
+.formio-form .formio-component-columns,
+.formio-form .formio-component-fieldset { max-width: 760px; }
+.formio-form .col-form-label,
+.formio-form .formio-component > label { font-weight: 600; margin-bottom: 6px; padding-top: 0; }
+.formio-form .field-required::after,
+.formio-form .required-star { color: var(--bs-f-ink); }
+.formio-form .form-text.text-muted { font-size: 13.5px; color: var(--bs-f-muted) !important; max-width: 65ch; margin-top: 5px; }
+
+.formio-form .form-control,
+.formio-form .choices__inner {
+  border: 0; border-bottom: 1.5px solid var(--bs-f-line); border-radius: 2px 2px 0 0;
+  background: var(--bs-f-panel); padding: 10px; font-size: 16px; min-height: 44px;
+  box-shadow: none;
+}
+.formio-form .form-control:hover { border-bottom-color: var(--bs-f-muted); }
+.formio-form .form-control:focus,
+.formio-form .choices.is-focused .choices__inner {
+  border-bottom-color: var(--bs-f-green-hi); background: var(--bs-f-panel); box-shadow: none;
+}
+.formio-form :focus-visible { outline: 3px solid var(--bs-f-green-hi); outline-offset: 2px; }
+
+.formio-form .form-check { display: flex; gap: 10px; align-items: flex-start; padding-left: 0; margin-bottom: 8px; }
+.formio-form .form-check-input {
+  width: 20px; height: 20px; margin: 2px 0 0; flex: none; float: none;
+  accent-color: var(--bs-f-green);
+}
+.formio-form .form-check-input:checked { background-color: var(--bs-f-green); border-color: var(--bs-f-green); }
+.formio-form .form-check-label { font-weight: 400; }
+
+/* Fehler */
+.formio-form .has-error .form-control,
+.formio-form .formio-error-wrapper .form-control { border-bottom-color: var(--bs-f-error); }
+.formio-form .invalid-feedback,
+.formio-form .formio-errors .error { color: var(--bs-f-error); font-size: 13.5px; font-weight: 500; }
+.formio-form .formio-error-wrapper,
+.formio-form .has-message { background: transparent; padding: 0; }
+.formio-form .alert-danger[ref="errorRef"],
+.formio-form > div > .alert-danger { border: 2px solid var(--bs-f-error); color: var(--bs-f-error); background: transparent; }
+
+/* ---------- Gruppen (Adressblöcke) ---------- */
+.formio-form fieldset { border: 0; padding: 0; margin: 0; }
+.formio-form fieldset > legend {
+  font-size: 19px; font-weight: 600; margin: 26px 0 10px; padding: 0; border: 0; width: auto; float: none;
+}
+.formio-form fieldset fieldset > legend { font-size: 16px; color: var(--bs-f-muted); margin-top: 14px; }
+.formio-form .formio-component-htmlelement h4 { font-size: 19px; font-weight: 600; margin: 26px 0 4px; }
+
+/* ---------- Hinweisboxen ---------- */
+.formio-form .alert {
+  border: 0; border-left: 4px solid var(--bs-f-green-hi); border-radius: 0;
+  background: var(--bs-f-panel); color: var(--bs-f-ink);
+  padding: 12px 16px; max-width: 760px; margin: 0;
+}
+.formio-form .alert-warning { border-left-color: #c79a00; background: var(--bs-f-warn-bg); color: var(--bs-f-warn-ink); }
+.formio-form .alert-danger { border-left-color: var(--bs-f-error); background: var(--bs-f-stop-bg); color: var(--bs-f-stop-ink); }
+.formio-form .alert a { color: inherit; }
+
+/* ---------- Datei-Upload ---------- */
+.formio-form .fileSelector {
+  border: 1.5px dashed var(--bs-f-green-hi); background: var(--bs-f-panel);
+  border-radius: 0; padding: 16px; color: var(--bs-f-ink);
+}
+.formio-form .fileSelector a,
+.formio-form .browse { color: var(--bs-f-green); font-weight: 600; }
+
+/* ---------- Buttons ---------- */
+.formio-form .formio-wizard-nav-container {
+  display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px;
+  list-style: none; padding: 0; margin-top: 34px;
+}
+.formio-form .formio-wizard-nav-container li { margin: 0; }
+.formio-form .formio-wizard-nav-container li:has(.btn-wizard-nav-cancel) { margin-right: auto; }
+.formio-form .btn {
+  border-radius: 0; font-weight: 600; padding: 11px 34px; min-width: 170px; font-size: 16px;
+}
+.formio-form .btn-primary,
+.formio-form .btn-success {
+  background: var(--bs-f-green); border: 2px solid var(--bs-f-green); color: var(--bs-f-on-green);
+}
+.formio-form .btn-primary:hover,
+.formio-form .btn-success:hover { background: var(--bs-f-green-hi); border-color: var(--bs-f-green-hi); }
+.formio-form .btn-secondary,
+.formio-form .btn-wizard-nav-previous {
+  background: transparent; border: 2px solid var(--bs-f-green); color: var(--bs-f-green-hi);
+}
+.formio-form .btn-secondary:hover,
+.formio-form .btn-wizard-nav-previous:hover { background: var(--bs-f-panel); color: var(--bs-f-green-hi); }
+
+/* Deutsche Beschriftung der Wizard-Buttons.
+   Notlösung per CSS: Form.io setzt die Texte in der Sprache des Renderers.
+   Sauberer ist die Übersetzung über die Sprachoptionen der einbettenden Seite. */
+.formio-form .btn-wizard-nav-cancel,
+.formio-form .btn-wizard-nav-previous,
+.formio-form .btn-wizard-nav-next,
+.formio-form .btn-wizard-nav-submit { font-size: 0; }
+.formio-form .btn-wizard-nav-cancel::after { content: "Abbrechen"; font-size: 16px; }
+.formio-form .btn-wizard-nav-previous::after { content: "Zurück"; font-size: 16px; }
+.formio-form .btn-wizard-nav-next::after { content: "Weiter"; font-size: 16px; }
+.formio-form .btn-wizard-nav-submit::after { content: "Einreichen"; font-size: 16px; }
+
+@media (max-width: 720px) {
+  .formio-form .btn { min-width: 0; flex: 1 1 140px; }
+  .formio-form .formio-wizard-nav-container li { flex: 1 1 140px; }
+  .formio-form .formio-wizard-nav-container li .btn { width: 100%; }
+}
