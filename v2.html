@@ -56,6 +56,9 @@
       form.nosubmit = false;
       form.on('submitDone', function (submission) {
         var art = submission && submission.data ? submission.data.howToSubmit : '';
+        var nr = submission && submission.data ? submission.data.applicationNumber : '';
+        var nummer = nr ? '<p>Ihre Antragsnummer: <strong>' + String(nr).replace(/[<>&]/g, '') + '</strong> (provisorisch). ' +
+          'Bitte geben Sie diese Nummer bei Rückfragen an.</p>' : '';
         var kontakt =
           '<div class="kontakt"><p>Freundliche Grüsse</p>' +
           '<p><strong>Tiefbauamt Basel-Stadt, Abteilung Entwässerung</strong></p>' +
@@ -70,7 +73,7 @@
             '<p>Vielen Dank für Ihr Kanalisationsbegehren. Sie erhalten zusätzlich eine kurze Bestätigung per E-Mail.</p>';
         document.getElementById('formular').innerHTML =
           '<div class="danke" data-art="' + (art === 'papier' ? 'papier' : 'online') + '">' +
-          '<p class="bs-h1">Danke für Ihr Kanalisationsbegehren</p>' + text + kontakt +
+          '<p class="bs-h1">Danke für Ihr Kanalisationsbegehren</p>' + text + nummer + kontakt +
           '<p class="test">Testversion: Es wird keine E-Mail versendet und keine Post erwartet.</p></div>';
         window.scrollTo(0, 0);
       });
