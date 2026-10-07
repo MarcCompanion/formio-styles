@@ -82,6 +82,8 @@
 
 /* ---------- Felder ---------- */
 .formio-form .formio-component { margin-bottom: 22px; max-width: 760px; }
+/* Ausgeblendete Felder dürfen keinen Abstand erzeugen */
+.formio-form .formio-component.formio-hidden { margin: 0; }
 .formio-form .formio-component-columns,
 .formio-form .formio-component-fieldset { max-width: 760px; }
 .formio-form .col-form-label,
