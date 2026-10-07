@@ -188,3 +188,10 @@
   .formio-form .formio-wizard-nav-container li { flex: 1 1 140px; }
   .formio-form .formio-wizard-nav-container li .btn { width: 100%; }
 }
+
+/* ---------- Fortschrittsanzeige (V2) ---------- */
+.formio-form .bs-fortschritt { margin: 4px 0 14px; max-width: 1020px; }
+.formio-form .bs-fortschritt-text { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.formio-form .bs-fortschritt-balken { height: 6px; background: var(--bs-f-band); border-radius: 3px; overflow: hidden; }
+.formio-form .bs-fortschritt-balken i { display: block; height: 100%; background: var(--bs-f-green-hi); transition: width .25s; }
+@media (prefers-reduced-motion: reduce) { .formio-form .bs-fortschritt-balken i { transition: none; } }
